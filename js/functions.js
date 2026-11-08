@@ -24,6 +24,21 @@ function printNumber(string) {
   return parseInt(result, 10);
 }
 
+const parseTimeToMinutes = (timeString) => {
+  const [hours, minutes] = timeString.split(':').map(Number);
+  return hours * 60 + minutes;
+};
+
+const isMeetingWithinWorkingDay = (workStart, workEnd, meetingStart, duration) => {
+  const workStartMinutes = parseTimeToMinutes(workStart);
+  const workEndMinutes = parseTimeToMinutes(workEnd);
+  const meetingStartMinutes = parseTimeToMinutes(meetingStart);
+  const meetingEndMinutes = meetingStartMinutes + duration;
+
+  return meetingStartMinutes >= workStartMinutes && meetingEndMinutes <= workEndMinutes;
+};
+
+isMeetingWithinWorkingDay('08:00', '17:30', '14:00', 90);
 checkStringLength('мурмурмяумяу', 20);
 isPalindrome('топот');
 printNumber('22330e234ete');
